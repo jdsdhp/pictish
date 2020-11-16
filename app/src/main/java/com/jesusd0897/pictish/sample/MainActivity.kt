@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        val id = Random.nextInt(1, 500)//101
+        val id = Random.nextInt(1, 500)
 
         val imageDownloadView: ImageViewDownloader = findViewById(R.id.image_view_downloader)
         imageDownloadView.preLoad(

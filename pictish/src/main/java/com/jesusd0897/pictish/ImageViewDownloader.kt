@@ -32,12 +32,10 @@ import androidx.annotation.RequiresApi
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.jesusd0897.pictish.util.fastblur
+import com.jesusd0897.pictish.util.provideOkHttpClient
 import com.jesusd0897.pictish.util.setSafeOnClickListener
 import com.nihaskalam.progressbuttonlibrary.CircularProgressButton
-import com.squareup.picasso.Callback
-import com.squareup.picasso.NetworkPolicy
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Transformation
+import com.squareup.picasso.*
 
 class ImageViewDownloader : FrameLayout {
 
@@ -46,15 +44,6 @@ class ImageViewDownloader : FrameLayout {
 
     var thumbUrl: String? = null
     var fullUrl: String? = null
-
-    /*@ColorRes
-    var progressColor = R.color.color_primary
-
-    @ColorRes
-    var indicatorColor = R.color.color_secondary
-
-    @ColorRes
-    var indicatorBackgroundColor = R.color.color_secondary_light*/
 
     @DimenRes
     var imageBorderRadius = R.dimen.dim_card_corner_radius
@@ -193,9 +182,12 @@ class ImageViewDownloader : FrameLayout {
         transformation: Transformation? = null,
         callback: Callback? = null
     ) {
-        val picasso = Picasso.get()
-            .load(url)
-            .placeholder(placeholder)
+        val picasso =
+            Picasso.Builder(imageView.context)
+                .downloader(OkHttp3Downloader(provideOkHttpClient()))
+                .build()
+                .load(url)
+                .placeholder(placeholder)
         if (useCache) picasso.networkPolicy(NetworkPolicy.OFFLINE)
         if (transformation != null) picasso.transform(transformation)
         picasso.into(imageView, callback)
@@ -209,9 +201,12 @@ class ImageViewDownloader : FrameLayout {
         transformation: Transformation? = null,
         callback: Callback? = null
     ) {
-        val picasso = Picasso.get()
-            .load(url)
-            .placeholder(placeholder)
+        val picasso =
+            Picasso.Builder(imageView.context)
+                .downloader(OkHttp3Downloader(provideOkHttpClient()))
+                .build()
+                .load(url)
+                .placeholder(placeholder)
         if (useCache) picasso.networkPolicy(NetworkPolicy.OFFLINE)
         if (transformation != null) picasso.transform(blurTransformation)
         picasso.into(imageView, callback)
