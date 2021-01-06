@@ -5,7 +5,7 @@ An Android component to display image preloading, with the possibility of manual
 
 [![JitPack](https://jitpack.io/v/jdsdhp/pictish.svg)](https://jitpack.io/#jdsdhp/pictish) 
 [![API](https://img.shields.io/badge/API-17%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=17) 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/jdsdhp/pictish/blob/master/LICENSE) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Twitter](https://img.shields.io/badge/Twitter-@jdsdhp-9C27B0.svg)](https://twitter.com/jdsdhp)
 
 ## Screenshots
