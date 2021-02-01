@@ -9,7 +9,7 @@ This library is based on [Picasso](https://github.com/square/picasso) and [Andro
 [![Twitter](https://img.shields.io/badge/Twitter-@jdsdhp-9C27B0.svg)](https://twitter.com/jdsdhp)
 
 ## Screenshots
-Idle State | Loading State | Loaded State
+Idle State | Cancel State | Finish State
 :-:|:-:|:-:
 ![](art/art-01.jpg) | ![](art/art-02.jpg) | ![](art/art-03.jpg)
 
