@@ -33,7 +33,7 @@ dependencies {
 
 ### Kotlin
 Usage from Activity or Fragment using `Pictish.Builder`.  Images in this example have been loaded from [Lorem Picsum](https://picsum.photos).<br>
-The first thing you need is the `parentView`, a `ViewGroup` where to insert the component, it can be a `FrameLayout`,` LinearLayout`...
+The first thing you need is the `parentView`, a `ViewGroup` where to insert the component, it can be a `FrameLayout`, `LinearLayout` and others.
 ```kotlin
 val id = 100
 

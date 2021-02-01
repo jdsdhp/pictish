@@ -111,7 +111,7 @@ class Pictish(builder: Builder) {
             url = fullUrl,
             placeholder = shapeableImageView.drawable,
             useCache = false,
-            transformation = blurTransformation,
+            transformation = null,
             callback = object : Callback {
                 override fun onSuccess() {
                     progressButton.visibility = View.INVISIBLE
@@ -221,7 +221,7 @@ class Pictish(builder: Builder) {
             url = fullUrl,
             placeholder = null,
             useCache = useCache,
-            transformation = blurTransformation,
+            transformation = null,
             callback = object : Callback {
                 override fun onSuccess() {
                     progressButton.visibility = View.GONE
