@@ -42,12 +42,6 @@
         android:padding="@dimen/dim_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.jesusd0897.pictish.ImageViewDownloader
-            android:id="@+id/image_view_downloader"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:ivd_image_border_radius="16dp" />
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

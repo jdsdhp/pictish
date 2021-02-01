@@ -15,33 +15,12 @@
  */
 package com.jesusd0897.pictish.util
 
-import android.content.Context
 import android.graphics.Bitmap
-import android.os.Build.VERSION
-import android.renderscript.Allocation
-import android.renderscript.Element
-import android.renderscript.RenderScript
-import android.renderscript.ScriptIntrinsicBlur
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
-fun fastblur(context: Context, sentBitmap: Bitmap, radius: Int): Bitmap? {
-    if (VERSION.SDK_INT > 16) {
-        val bitmap = sentBitmap.copy(sentBitmap.config, true)
-        val rs = RenderScript.create(context)
-        val input = Allocation.createFromBitmap(
-            rs, sentBitmap, Allocation.MipmapControl.MIPMAP_NONE,
-            Allocation.USAGE_SCRIPT
-        )
-        val output = Allocation.createTyped(rs, input.type)
-        val script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs))
-        script.setRadius(radius /* e.g. 3.f */.toFloat())
-        script.setInput(input)
-        script.forEach(output)
-        output.copyTo(bitmap)
-        return bitmap
-    }
+fun fastBlur(sentBitmap: Bitmap, radius: Int): Bitmap? {
     val bitmap = sentBitmap.copy(sentBitmap.config, true)
     if (radius < 1) {
         return null

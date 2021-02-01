@@ -27,7 +27,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 30
         versionCode 1
-        versionName "0.1.1"
+        versionName "1.0.0"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
         consumerProguardFiles "consumer-rules.pro"
@@ -57,5 +57,4 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation "com.squareup.picasso:picasso:2.71828" //Picasso
-    implementation 'com.nihaskalam.android:progress-button:1.0.1'
-}
+    implementation 'com.github.abdularis:androidbuttonprogress:1.1.0'} //AndroidButtonProgress

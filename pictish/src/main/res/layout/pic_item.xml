@@ -15,7 +15,6 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -27,21 +26,10 @@
         android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic" />
 
-    <com.nihaskalam.progressbuttonlibrary.CircularProgressButton
-        android:id="@+id/download_btn"
+    <com.github.abdularis.buttonprogress.DownloadButtonProgress
+        android:id="@+id/progress_btn"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_gravity="center"
-        android:alpha=".6"
-        android:textSize="14sp"
-        app:pb_colorIndicator="?attr/colorPictishProgress"
-        app:pb_cornerRadius="56dp"
-        app:pb_iconCancel="@drawable/ic_download_icon"
-        app:pb_iconComplete="@drawable/ic_complete_icon"
-        app:pb_iconError="@drawable/ic_error_icon"
-        app:pb_selectorCancel="@color/cancel_state_selector"
-        app:pb_selectorComplete="@color/complete_state_selector"
-        app:pb_selectorError="@color/error_state_selector"
-        app:pb_selectorIdle="@color/idle_state_selector" />
+        android:layout_gravity="center" />
 
 </FrameLayout>

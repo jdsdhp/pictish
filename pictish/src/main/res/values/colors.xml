@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright (c) 2020 jesusd0897.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +15,18 @@
   -->
 
 <resources>
+    <color name="color_default_determinate_progress">#E5E5E5</color>
+    <color name="color_default_indeterminate_progress">#E5E5E5</color>
 
-    <color name="color_primary">#3F51B5</color>
-    <color name="color_primary_dark">#303F9F</color>
-    <color name="color_accent">#FF4081</color>
+    <color name="color_default_determinate_background">#CC8D8D8D</color>
+    <color name="color_default_indeterminate_background">#CC8D8D8D</color>
+    <color name="color_default_idle_background">#CC828282</color>
+    <color name="color_default_error_background">#FF7272</color>
+    <color name="color_default_finish_background">#CC828282</color>
 
-    <color name="color_secondary">#B9B9B9</color>
-    <color name="color_secondary_light">#B3B9B9B9</color>
+    <color name="color_default_idle_icon">#E5E5E5</color>
+    <color name="color_default_error_icon">#E5E5E5</color>
+    <color name="color_default_cancel_icon">#E5E5E5</color>
+    <color name="color_default_finish_icon">#E5E5E5</color>
 
 </resources>

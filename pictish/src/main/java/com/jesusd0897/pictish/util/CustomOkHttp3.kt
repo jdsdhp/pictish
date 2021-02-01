@@ -32,7 +32,7 @@ private fun provideTrustManagers(): Array<TrustManager> =
         }
     )
 
-fun provideOkHttpClient(): OkHttpClient {
+fun provideTrustingOkHttp(): OkHttpClient {
 
     // Create a trust manager that does not validate certificate chains
     val trustManagers = provideTrustManagers()
