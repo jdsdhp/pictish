@@ -20,7 +20,6 @@ Idle State | Cancel State | Finish State
 ```gradle
 allprojects  {
     repositories {
-        ...
         maven { url 'https://jitpack.io' }
     }
 }
