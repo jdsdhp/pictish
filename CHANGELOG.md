@@ -1,5 +1,11 @@
 ChangeLog
 ==========
+Version 1.0.1 *(2021-02-02)*
+----------------------------
+- FIX: Bug on default placeholder loading.
+- FIX: Null urls is now supported.
+- forceFullLoad method renamed to load.
+
 Version 1.0.0 *(2021-02-01)*
 ----------------------------
 - New `Pictish.Builder` structure.

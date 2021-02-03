@@ -45,7 +45,7 @@ val pictish = Pictish.Builder(context, parentView)
 ```
 
 ### Behavior customizations.
-Instead `preLoad()` method you can use `forceFullLoad()` to load image directly.
+Instead `preLoad()` method you can use `load()` to load image directly.
 For custom behavior you can add some code to `Pictish.Builder` enabling a custom Picasso instance, cancelable functionality and cache usage.
 ```kotlin
 .setPicasso(Picasso.Builder(this).downloader(OkHttp3Downloader(provideTrustingOkHttp())).build())

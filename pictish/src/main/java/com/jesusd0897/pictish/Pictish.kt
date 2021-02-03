@@ -26,12 +26,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import com.github.abdularis.buttonprogress.DownloadButtonProgress
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.jesusd0897.pictish.util.fastBlur
 import com.squareup.picasso.*
-
 
 class Pictish(builder: Builder) {
 
@@ -105,33 +105,42 @@ class Pictish(builder: Builder) {
     lateinit var progressButton: DownloadButtonProgress
 
     private val clickListener = OnClickListener {
-        progressButton.setIndeterminate()
-        picassoLoad(
-            imageView = shapeableImageView,
-            url = fullUrl,
-            placeholder = shapeableImageView.drawable,
-            useCache = false,
-            transformation = null,
-            callback = object : Callback {
-                override fun onSuccess() {
-                    progressButton.visibility = View.INVISIBLE
-                    progressButton.finishIcon = buttonFinishIcon
-                    progressButton.finishBgColor = finishBgColor
-                    progressButton.setFinish()
-                    fullUrl?.let { it1 ->
+        if (fullUrl.isNullOrBlank()) {
+            progressButton.finishIcon = buttonErrorIcon
+            progressButton.finishBgColor = errorBgColor
+            progressButton.setFinish()
+            isFullLoaded = false
+            onPictishLoadListener?.onFullLoadError(
+                fullUrl,
+                Exception("Invalid image on path = '$fullUrl'")
+            )
+        } else {
+            progressButton.setIndeterminate()
+            picassoLoad(
+                imageView = shapeableImageView,
+                url = fullUrl,
+                placeholder = shapeableImageView.drawable,
+                useCache = false,
+                transformation = null,
+                callback = object : Callback {
+                    override fun onSuccess() {
+                        progressButton.visibility = View.GONE
+                        progressButton.finishIcon = buttonFinishIcon
+                        progressButton.finishBgColor = finishBgColor
+                        progressButton.setFinish()
                         isFullLoaded = true
-                        onPictishLoadListener?.onFullLoadSuccess(it1)
+                        onPictishLoadListener?.onFullLoadSuccess(fullUrl)
                     }
-                }
 
-                override fun onError(e: Exception?) {
-                    progressButton.finishIcon = buttonErrorIcon
-                    progressButton.finishBgColor = errorBgColor
-                    progressButton.setFinish()
-                    isFullLoaded = false
-                    onPictishLoadListener?.onFullLoadError(fullUrl, e)
-                }
-            })
+                    override fun onError(e: Exception?) {
+                        progressButton.finishIcon = buttonErrorIcon
+                        progressButton.finishBgColor = errorBgColor
+                        progressButton.setFinish()
+                        isFullLoaded = false
+                        onPictishLoadListener?.onFullLoadError(fullUrl, e)
+                    }
+                })
+        }
     }
 
     init {
@@ -196,30 +205,44 @@ class Pictish(builder: Builder) {
             .setAllCorners(CornerFamily.ROUNDED, imageBorderRadius)
             .build()
         shapeableImageView.setOnClickListener {
-            if (isFullLoaded) onPictishClickListener?.onClick(
+            if (progressButton.isGone) onPictishClickListener?.onClick(
                 fullUrl = fullUrl,
                 thumbUrl = thumbUrl
-            )
+            ) else progressButton.performClick()
         }
         shapeableImageView.setOnLongClickListener {
-            if (isFullLoaded) onPictishClickListener?.onLongClick(
+            if (progressButton.isGone) onPictishClickListener?.onLongClick(
                 fullUrl = fullUrl,
                 thumbUrl = thumbUrl
-            )
+            ) else progressButton.performLongClick()
             true
         }
 
-        if (!thumbUrl.isNullOrBlank() && !fullUrl.isNullOrBlank()) preLoad()
         parentView.addView(
             view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         )
+    }
+
+    private fun picassoLoad(
+        imageView: ImageView,
+        url: String?,
+        placeholder: Drawable?,
+        useCache: Boolean,
+        transformation: Transformation?,
+        callback: Callback?,
+    ) {
+        val creator = picasso.load(url)
+        placeholder?.let { creator.placeholder(it) }
+        transformation?.let { creator.transform(it) }
+        if (useCache) creator.networkPolicy(NetworkPolicy.OFFLINE)
+        creator.into(imageView, callback)
     }
 
     fun preLoad(): Pictish {
         picassoLoad(
             imageView = shapeableImageView,
             url = fullUrl,
-            placeholder = null,
+            placeholder = emptyPlaceholder,
             useCache = useCache,
             transformation = null,
             callback = object : Callback {
@@ -260,44 +283,8 @@ class Pictish(builder: Builder) {
         return this
     }
 
-    private fun picassoLoad(
-        imageView: ImageView,
-        url: String?,
-        placeholder: Drawable?,
-        useCache: Boolean,
-        transformation: Transformation?,
-        callback: Callback?,
-    ) {
-        val creator = picasso.load(url)
-        placeholder?.let { creator.placeholder(it) }
-        transformation?.let { creator.transform(it) }
-        if (useCache) creator.networkPolicy(NetworkPolicy.OFFLINE)
-        creator.into(imageView, callback)
-    }
-
-    fun forceFullLoad(): Pictish {
-        progressButton.visibility = View.GONE
-        picassoLoad(
-            imageView = shapeableImageView,
-            url = fullUrl,
-            placeholder = emptyPlaceholder,
-            useCache = false,
-            transformation = null,
-            callback = object : Callback {
-                override fun onSuccess() {
-                    fullUrl?.let {
-                        isFullLoaded = true
-                        onPictishLoadListener?.onFullLoadSuccess(it)
-                    }
-                }
-
-                override fun onError(e: java.lang.Exception?) {
-                    isFullLoaded = false
-                    onPictishLoadListener?.onFullLoadError(fullUrl, e)
-                }
-
-            },
-        )
+    fun load(): Pictish {
+        progressButton.performClick()
         return this
     }
 

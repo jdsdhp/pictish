@@ -44,12 +44,12 @@ class MainActivity : AppCompatActivity() {
 
         val pictish = Pictish.Builder(context = this, parentView = container)
             .setThumbUrl("https://picsum.photos/id/$id/50")
-            .setFullUrl("https://picsum.photos/id/$id/1080")
+            .setFullUrl("https://picsum.photos/id/$id/1000")
             .setPicasso(
                 Picasso.Builder(this).downloader(OkHttp3Downloader(provideTrustingOkHttp())).build()
             )
             .isCancelable(true)
-            .useCache(true)
+            .useCache(false)
             .setButtonWith(100)
             .setButtonHeight(100)
             .setIconWith(64)
@@ -66,28 +66,16 @@ class MainActivity : AppCompatActivity() {
             .setErrorBgColor(ContextCompat.getColor(this, R.color.color_default_error_background))
             .setFinishBgColor(ContextCompat.getColor(this, R.color.color_default_finish_background))
             .setIndeterminateBgColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.color_default_indeterminate_background
-                )
+                ContextCompat.getColor(this, R.color.color_default_indeterminate_background)
             )
             .setDeterminateBgColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.color_default_determinate_background
-                )
+                ContextCompat.getColor(this, R.color.color_default_determinate_background)
             )
             .setProgressDeterminateColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.color_default_determinate_progress
-                )
+                ContextCompat.getColor(this, R.color.color_default_determinate_progress)
             )
             .setProgressIndeterminateColor(
-                ContextCompat.getColor(
-                    this,
-                    R.color.color_default_indeterminate_progress
-                )
+                ContextCompat.getColor(this, R.color.color_default_indeterminate_progress)
             )
             .build()
             .preLoad()
